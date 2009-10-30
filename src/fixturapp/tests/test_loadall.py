@@ -1,5 +1,8 @@
 from django.test import TestCase
+from django.core.management import load_command_class
+from django.core.management.base import BaseCommand
 from fixturapp.management.commands import get_datasets, find_datasets
+from fixturapp.management.commands import fixturapp_loadall
 
 dummyapp = 'fixturapp.tests.dummyapp'
 emptyapp = 'fixturapp.tests.emptyapp'
@@ -25,3 +28,13 @@ class FixturappLoadAllTests(TestCase):
         """Sucessfully get datasets for a list of apps ignoring ImportErrors"""
         from dummyapp.datasets import DummyData
         self.assertEquals(find_datasets([dummyapp, emptyapp]), [DummyData])
+
+    def test_load_command_loadall(self):
+        """Sucessfully load the command fixturapp_loadall from django project"""
+        self.failUnless(isinstance(create_command(), fixturapp_loadall.Command))
+
+    def test_command_is_valid_django_command(self):
+        """Asserts that fixturapp_loadall command is a valid Django command"""
+        self.failUnless(isinstance(create_command(), BaseCommand))
+
+#    def test_fixture_was_loaded_by_calling_command(self):

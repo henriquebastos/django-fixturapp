@@ -1,8 +1,10 @@
 from django.test import TestCase
-from django.core.management import load_command_class
+from django.core.management import load_command_class, call_command
 from django.core.management.base import BaseCommand
 from fixturapp.management.commands import get_datasets, find_datasets
 from fixturapp.management.commands import fixturapp_loadall
+from dummyapp.models import Dummy
+from dummyapp.datasets import DummyData
 
 dummyapp = 'fixturapp.tests.dummyapp'
 emptyapp = 'fixturapp.tests.emptyapp'
@@ -42,4 +44,8 @@ class FixturappLoadAllTests(TestCase):
         """Asserts that fixturapp_loadall command is a valid Django command"""
         self.failUnless(isinstance(create_command(), BaseCommand))
 
-#    def test_fixture_was_loaded_by_calling_command(self):
+    def test_fixture_was_loaded_by_calling_command(self):
+        """Check if Dummy fixtures were loaded to the database"""
+        call_command('fixturapp_loadall')
+        obj = Dummy.objects.get(name='Buster')
+        self.assertEquals(obj.name, DummyData.buster.name)

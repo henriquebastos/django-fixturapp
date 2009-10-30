@@ -29,6 +29,11 @@ class FixturappLoadAllTests(TestCase):
         from dummyapp.datasets import DummyData
         self.assertEquals(find_datasets([dummyapp, emptyapp]), [DummyData])
 
+    def test_find_fixture_for_installed_apps(self):
+        """Sucessfully get datasets for INSTALLED_APPS defined in testsettings ignoring ImportErrors"""
+        from django.conf import settings
+        self.assertEquals(find_datasets(settings.INSTALLED_APPS), [DummyData])
+
     def test_load_command_loadall(self):
         """Sucessfully load the command fixturapp_loadall from django project"""
         self.failUnless(isinstance(create_command(), fixturapp_loadall.Command))

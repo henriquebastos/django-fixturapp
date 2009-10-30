@@ -1,0 +1,25 @@
+django-fixturapp
+================
+
+An utility app that integrates Kumar McMillan's great Fixture module with Django.
+
+
+Usage
+=====
+
+1. Include Fixturapp on your site's INSTALLED_APPS list.
+
+2. Try ``python manage.py help`` to see if the ``fixturapp_*`` commands are now available.
+
+3. Inside each Django app you wish, create a ``datasets`` package with your fixtures.
+
+4. To fill your database with fixture data, run ``python manage.py fixturapp_loadall``.
+
+
+How it works
+============
+
+Fixturapp exports a new command ``fixturapp_loadall`` to your ``manage.py``.
+
+This command searchs for a ``datasets`` module inside each INSTALLED_APPS and loads the found dataset classes into the databse.
+

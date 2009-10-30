@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from fixturapp.management.commands import get_datasets
+from fixturapp.management.commands import get_datasets, fill_database
 from fixture import DjangoFixture
 from fixture.style import NamedDataStyle
 
@@ -16,10 +16,4 @@ class Command(BaseCommand):
                 raise LookupError('No dataset found for %s.' % app)
             fixtures.extend(datasets)
 
-        print "Datasets: %s" % fixtures.sort()
-
-        loader = DjangoFixture(style=NamedDataStyle())
-        data = loader.data(*fixtures)
-        print "Installing datasets..."
-        data.setup()
-        print "Done."
+        fill_database(fixtures)

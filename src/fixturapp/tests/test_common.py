@@ -1,6 +1,7 @@
 from django.test import TestCase
-from fixturapp.management.commands import get_datasets, find_datasets
+from fixturapp.management.commands import get_datasets, find_datasets, fill_database
 from dummyapp.datasets import DummyData
+from dummyapp.models import Dummy
 
 dummyapp = 'fixturapp.tests.dummyapp'
 emptyapp = 'fixturapp.tests.emptyapp'
@@ -26,3 +27,15 @@ class FixturappCommon(TestCase):
         """Sucessfully get datasets for INSTALLED_APPS defined in testsettings ignoring ImportErrors"""
         from django.conf import settings
         self.assertEquals(find_datasets(settings.INSTALLED_APPS), [DummyData])
+
+    def test_fill_database_with_data_from_fixture(self):
+        """Check if ``fill_database`` loaded DummyData to the database"""
+        fill_database([DummyData])
+        obj = Dummy.objects.get(name='Buster')
+        self.assertEquals(obj.name, DummyData.buster.name)
+
+    def test_raises_when_call_fill_database_with_empty_list(self):
+        """Raises when calling ``fill_database`` passing no data"""
+        self.assertRaises(ValueError, lambda: fill_database([]))
+        self.assertRaises(TypeError, lambda: fill_database('None'))
+        self.assertRaises(TypeError, lambda: fill_database(DummyData))

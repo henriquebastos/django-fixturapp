@@ -1,9 +1,8 @@
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
+from fixturapp.management.commands import find_datasets, fill_database
 from fixture import DjangoFixture
 from fixture.style import NamedDataStyle
-
-from fixturapp.management.commands import find_datasets
 
 class Command(BaseCommand):
     help = "Load datasets fixtures from Django apps into database"
@@ -15,10 +14,5 @@ class Command(BaseCommand):
         fixtures = find_datasets(apps) #Discover datasets in apps
         if not len(fixtures):
             raise CommandError('No fixture datasets found.')
-        print "Fixtures: %s" % fixtures.sort()
 
-        loader = DjangoFixture(style=NamedDataStyle())
-        data = loader.data(*fixtures)
-        print "Installing fixture data..."
-        data.setup()
-        print "Done."
+        fill_database(fixtures)

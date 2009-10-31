@@ -5,13 +5,19 @@ from fixturapp.management.commands import fixturapp_loadall
 from dummyapp.models import Dummy
 from dummyapp.datasets import DummyData
 
+
 def create_command():
     return load_command_class('fixturapp', 'fixturapp_loadall')
 
+
 class FixturappLoadAllTests(TestCase):
+
     def test_load_command_loadall(self):
-        """Sucessfully load the command fixturapp_loadall from django project"""
-        self.failUnless(isinstance(create_command(), fixturapp_loadall.Command))
+        """Sucessfully load the command ``fixturapp_loadall`` from django
+        project
+        """
+        self.failUnless(isinstance(create_command(),
+                                   fixturapp_loadall.Command))
 
     def test_command_is_valid_django_command(self):
         """Asserts that fixturapp_loadall command is a valid Django command"""

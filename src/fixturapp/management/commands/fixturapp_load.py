@@ -1,7 +1,9 @@
 from django.core.management.base import BaseCommand
-from fixturapp.management.commands import get_datasets, fill_database
 from fixture import DjangoFixture
 from fixture.style import NamedDataStyle
+
+from fixturapp.management.commands import get_datasets, fill_database
+
 
 class Command(BaseCommand):
     help = "Load datasets fixtures from Django apps into database"

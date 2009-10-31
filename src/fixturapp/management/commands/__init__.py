@@ -2,6 +2,7 @@ from django.utils.importlib import import_module
 from fixture import DjangoFixture
 from fixture.style import NamedDataStyle
 
+
 def get_datasets(app, package='.datasets', sufix='Data'):
     fixtures = []
 
@@ -12,6 +13,7 @@ def get_datasets(app, package='.datasets', sufix='Data'):
             fixtures.append(getattr(module, i))
     return fixtures
 
+
 def find_datasets(apps):
     fixtures = []
     try:
@@ -20,6 +22,7 @@ def find_datasets(apps):
     except ImportError:
         pass
     return fixtures
+
 
 def fill_database(fixtures, verbosity=1):
     """Given a list of fixture Data, fill all the data into database"""

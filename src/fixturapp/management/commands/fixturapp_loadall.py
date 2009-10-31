@@ -1,8 +1,10 @@
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
-from fixturapp.management.commands import find_datasets, fill_database
 from fixture import DjangoFixture
 from fixture.style import NamedDataStyle
+
+from fixturapp.management.commands import find_datasets, fill_database
+
 
 class Command(BaseCommand):
     help = "Load datasets fixtures from Django apps into database"

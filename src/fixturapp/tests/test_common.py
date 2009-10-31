@@ -1,12 +1,18 @@
 from django.test import TestCase
-from fixturapp.management.commands import get_datasets, find_datasets, fill_database
-from dummyapp.datasets import DummyData
-from dummyapp.models import Dummy
+
+from fixturapp.management.commands import (get_datasets,
+                                           find_datasets,
+                                           fill_database)
+from fixturapp.tests.dummyapp.datasets import DummyData
+from fixturapp.tests.dummyapp.models import Dummy
+
 
 dummyapp = 'fixturapp.tests.dummyapp'
 emptyapp = 'fixturapp.tests.emptyapp'
 
+
 class FixturappCommon(TestCase):
+
     def test_environment(self):
         """Just make sure everything is set up correctly."""
         self.assert_(True)
@@ -24,7 +30,9 @@ class FixturappCommon(TestCase):
         self.assertEquals(find_datasets([dummyapp, emptyapp]), [DummyData])
 
     def test_find_fixture_for_installed_apps(self):
-        """Sucessfully get datasets for INSTALLED_APPS defined in testsettings ignoring ImportErrors"""
+        """Sucessfully get datasets for INSTALLED_APPS defined in testsettings
+        ignoring ImportErrors
+        """
         from django.conf import settings
         self.assertEquals(find_datasets(settings.INSTALLED_APPS), [DummyData])
 

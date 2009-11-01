@@ -18,4 +18,4 @@ class Command(BaseCommand):
                 raise LookupError('No dataset found for %s.' % app)
             fixtures.extend(datasets)
 
-        fill_database(fixtures)
+        fill_database(fixtures, int(options.get('verbosity', 1)))

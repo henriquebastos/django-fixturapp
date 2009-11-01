@@ -17,4 +17,4 @@ class Command(BaseCommand):
         if not len(fixtures):
             raise CommandError('No fixture datasets found.')
 
-        fill_database(fixtures)
+        fill_database(fixtures, int(options.get('verbosity', 1)))

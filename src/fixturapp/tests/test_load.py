@@ -41,18 +41,18 @@ class FixturappLoadTests(TestCase):
         """Raises when loading from a specific app that has an empty datasets
         package
         """
-        callable = lambda: call_command('fixturapp_load',
+        callable_ = lambda: call_command('fixturapp_load',
                                         'fixturapp.tests.incompleteapp')
-        self.assertRaises(LookupError, callable)
+        self.assertRaises(LookupError, callable_)
 
     def test_raises_when_some_app_does_not_have_data(self):
         """``fixturapp_load app1 app2`` should be sucessfull only if all apps
         have data.
         """
-        callable = lambda: call_command('fixturapp_load',
+        callable_ = lambda: call_command('fixturapp_load',
                                         'fixturapp.tests.dummyapp',
                                         'fixturapp.tests.incompleteapp')
-        self.assertRaises(LookupError, callable)
+        self.assertRaises(LookupError, callable_)
         self.assertRaises(ImportError,
                           lambda: call_command('fixturapp_load',
                                                'fixturapp.tests.dummyapp',

@@ -10,6 +10,8 @@ from fixturapp.tests.dummyapp.datasets import DummyData
 def create_command():
     return load_command_class('fixturapp', 'fixturapp_load')
 
+def call_load(*args):
+    return call_command('fixturapp_load', *args, verbosity=0)
 
 class FixturappLoadTests(TestCase):
 
@@ -25,7 +27,7 @@ class FixturappLoadTests(TestCase):
         """Check if the fixturapp_load command has loaded Dummy fixtures into
         database
         """
-        call_command('fixturapp_load', 'fixturapp.tests.dummyapp')
+        call_load('fixturapp.tests.dummyapp')
         obj = Dummy.objects.get(name='Buster')
         self.assertEquals(obj.name, DummyData.buster.name)
 
@@ -34,32 +36,28 @@ class FixturappLoadTests(TestCase):
         package
         """
         self.assertRaises(ImportError,
-                          lambda: call_command('fixturapp_load',
-                                               'fixturapp.tests.emptyapp'))
+                          lambda: call_load('fixturapp.tests.emptyapp'))
 
     def test_raises_when_app_have_empty_datasets_package(self):
         """Raises when loading from a specific app that has an empty datasets
         package
         """
-        callable_ = lambda: call_command('fixturapp_load',
-                                        'fixturapp.tests.incompleteapp')
-        self.assertRaises(LookupError, callable_)
+        self.assertRaises(LookupError,
+                          lambda: call_load('fixturapp.tests.incompleteapp'))
 
     def test_raises_when_some_app_does_not_have_data(self):
         """``fixturapp_load app1 app2`` should be sucessfull only if all apps
         have data.
         """
-        callable_ = lambda: call_command('fixturapp_load',
-                                        'fixturapp.tests.dummyapp',
-                                        'fixturapp.tests.incompleteapp')
-        self.assertRaises(LookupError, callable_)
+        self.assertRaises(LookupError,
+                          lambda: call_load('fixturapp.tests.dummyapp',
+                                            'fixturapp.tests.incompleteapp'))
         self.assertRaises(ImportError,
-                          lambda: call_command('fixturapp_load',
-                                               'fixturapp.tests.dummyapp',
-                                               'fixturapp.tests.emptyapp'))
+                          lambda: call_load('fixturapp.tests.dummyapp',
+                                            'fixturapp.tests.emptyapp'))
 
     def test_fixture_was_loaded_by_calling_fixturapp_load(self):
         """Check if ``fixturapp_load`` loaded DummyData to the database"""
-        call_command('fixturapp_load', 'fixturapp.tests.dummyapp')
+        call_load('fixturapp.tests.dummyapp')
         obj = Dummy.objects.get(name='Buster')
         self.assertEquals(obj.name, DummyData.buster.name)

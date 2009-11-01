@@ -38,7 +38,7 @@ class FixturappCommon(TestCase):
 
     def test_fill_database_with_data_from_fixture(self):
         """Check if ``fill_database`` loaded DummyData to the database"""
-        fill_database([DummyData])
+        fill_database([DummyData], verbosity=0)
         obj = Dummy.objects.get(name='Buster')
         self.assertEquals(obj.name, DummyData.buster.name)
 

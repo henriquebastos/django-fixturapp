@@ -25,6 +25,6 @@ class FixturappLoadAllTests(TestCase):
 
     def test_fixture_was_loaded_by_calling_command(self):
         """Check if Dummy fixtures were loaded to the database"""
-        call_command('fixturapp_loadall')
+        call_command('fixturapp_loadall', verbosity=0)
         obj = Dummy.objects.get(name='Buster')
         self.assertEquals(obj.name, DummyData.buster.name)

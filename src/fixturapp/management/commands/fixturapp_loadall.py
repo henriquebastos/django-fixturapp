@@ -8,7 +8,7 @@ from fixturapp.management.commands import find_datasets, fill_database
 
 
 class Command(NoArgsCommand):
-    help = "Load datasets fixtures from Django apps into database"
+    help = "Load every dataset fixtures from INSTALLED_APPS into database"
 
     def handle_noargs(self, **options):
         # Discover datasets in apps

@@ -6,7 +6,7 @@ from fixturapp.management.commands import get_datasets, fill_database
 
 
 class Command(BaseCommand):
-    help = "Load datasets fixtures from Django apps into database"
+    help = "Load datasets fixtures from specified apps into database"
     args = "[app1 app2 ...]"
 
     def handle(self, *apps, **options):

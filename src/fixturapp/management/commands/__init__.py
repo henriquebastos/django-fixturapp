@@ -27,11 +27,11 @@ def find_datasets(apps):
     Since it's a search, ImportErrors are ignored.
     """
     fixtures = []
-    try:
-        for app in apps:
+    for app in apps:
+        try:
             fixtures.extend(get_datasets(app))
-    except ImportError:
-        pass
+        except ImportError:
+            pass
     return fixtures
 
 

@@ -1,8 +1,8 @@
 django-fixturapp
 ================
 
-Fixturapp is an utility app that brings Django management commands to
-integrates the great Fixture module with your Django Project.
+Fixturapp is an utility app that brings management commands to integrate the
+great Fixture module with your Django Project.
 
 Check the Fixture module at http://www.farmdev.com/projects/fixture/
 

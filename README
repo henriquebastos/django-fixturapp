@@ -1,7 +1,43 @@
 django-fixturapp
 ================
 
-An utility app that integrates Kumar McMillan's great Fixture module with Django.
+Fixturapp is an utility app that brings Django management commands to
+integrates the great Fixture module with your Django Project.
+
+Check the Fixture module at http://www.farmdev.com/projects/fixture/
+
+
+Why
+===
+
+For some cases, managing Django Fixtures can be very cumbersome. Since it's
+centered on dumping existent data from the database, fixtures have predefined
+primary key value.
+
+When you need complex sets of initial data, it can be really annoying and
+error prone to change manually generated initial data or keep regenerating
+them.
+
+The Fixture module solves those problems.
+
+
+Install
+=======
+
+To install django-fixturapp you will need setuptools:
+
+	git clone http://github.com/henriquebastos/diango-fixturapp
+    cd /path/to/repo
+    python setup.py install
+
+To run Fixture's own test suite you need to create a buildout:
+
+    python setup.py
+    ./bin/buildout
+
+Then you can run the tests with:
+
+    ./bin/test
 
 
 Usage
@@ -9,17 +45,11 @@ Usage
 
 1. Include Fixturapp on your site's INSTALLED_APPS list.
 
-2. Try ``python manage.py help`` to see if the ``fixturapp_*`` commands are now available.
+2. Try ``python manage.py help`` to see if the ``fixturapp_*`` commands are
+   now available.
 
-3. Inside each Django app you wish, create a ``datasets`` package with your fixtures.
+3. Inside each Django app you wish, create a ``datasets`` package with your
+   fixtures.
 
-4. To fill your database with fixture data, run ``python manage.py fixturapp_loadall``.
-
-
-How it works
-============
-
-Fixturapp exports a new command ``fixturapp_loadall`` to your ``manage.py``.
-
-This command searchs for a ``datasets`` module inside each INSTALLED_APPS and loads the found dataset classes into the databse.
-
+4. To fill your database with fixture data, run
+   ``python manage.py fixturapp_loadall``.

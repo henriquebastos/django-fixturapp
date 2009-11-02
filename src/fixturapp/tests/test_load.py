@@ -15,7 +15,7 @@ def call_load(*args):
     return call_command('fixturapp_load', *args, verbosity=0)
 
 
-class FixturappLoadTests(TestCase):
+class TestLoad(TestCase):
 
     def test_load_command_load(self):
         """Sucessfully load the command fixturapp_load from django project"""

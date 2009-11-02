@@ -11,7 +11,7 @@ dummyapp = 'fixturapp.tests.dummyapp'
 emptyapp = 'fixturapp.tests.emptyapp'
 
 
-class FixturappCommon(TestCase):
+class TestCommon(TestCase):
 
     def test_environment(self):
         """Just make sure everything is set up correctly."""

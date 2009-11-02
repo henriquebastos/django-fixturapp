@@ -11,7 +11,7 @@ def create_command():
     return load_command_class('fixturapp', 'fixturapp_loadall')
 
 
-class FixturappLoadAllTests(TestCase):
+class TestLoadAll(TestCase):
 
     def test_load_command_loadall(self):
         """

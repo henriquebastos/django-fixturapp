@@ -26,24 +26,25 @@ class FixturappCommon(TestCase):
         self.assertRaises(ImportError, lambda: get_datasets(emptyapp))
 
     def test_find_fixture_for_many_apps(self):
-        """Sucessfully get datasets for a list of apps ignoring ImportErrors"""
+        """Sucessfully get datasets for a list of apps ignoring ImportError"""
         self.assertEquals(find_datasets([dummyapp, emptyapp]), [DummyData])
 
     def test_find_fixture_for_installed_apps(self):
-        """Sucessfully get datasets for INSTALLED_APPS defined in testsettings
-        ignoring ImportErrors
+        """
+        Sucessfully get datasets for INSTALLED_APPS defined in testsettings
+        ignoring ImportError
         """
         from django.conf import settings
         self.assertEquals(find_datasets(settings.INSTALLED_APPS), [DummyData])
 
     def test_fill_database_with_data_from_fixture(self):
-        """Check if ``fill_database`` loaded DummyData to the database"""
+        """Check that fill_database loaded DummyData to the database"""
         fill_database([DummyData], verbosity=0)
         obj = Dummy.objects.get(name='Buster')
         self.assertEquals(obj.name, DummyData.buster.name)
 
     def test_raises_when_call_fill_database_with_empty_list(self):
-        """Raises when calling ``fill_database`` passing no data"""
+        """Raises when calling fill_database not passing fixtures"""
         self.assertRaises(ValueError, lambda: fill_database([]))
         self.assertRaises(TypeError, lambda: fill_database('None'))
         self.assertRaises(TypeError, lambda: fill_database(DummyData))

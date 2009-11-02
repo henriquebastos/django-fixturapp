@@ -14,8 +14,8 @@ def create_command():
 class FixturappLoadAllTests(TestCase):
 
     def test_load_command_loadall(self):
-        """Sucessfully load the command ``fixturapp_loadall`` from django
-        project
+        """
+        Sucessfully load the command fixturapp_loadall from django project
         """
         self.assertTrue(isinstance(create_command(),
                                    fixturapp_loadall.Command))

@@ -4,6 +4,12 @@ from fixture.style import NamedDataStyle
 
 
 def get_datasets(app, package='.datasets', sufix='Data'):
+    """
+    Get list of dataset classes ending with ``sufix`` from ``package``
+    submodule on ``app``.
+
+    It's expected to raise any error out loud.
+    """
     fixtures = []
 
     module = import_module(package, app)
@@ -15,6 +21,11 @@ def get_datasets(app, package='.datasets', sufix='Data'):
 
 
 def find_datasets(apps):
+    """
+    Return a list of DataSet classes found on the received list of ``apps``.
+
+    Since it's a search, ImportErrors are ignored.
+    """
     fixtures = []
     try:
         for app in apps:
@@ -25,7 +36,9 @@ def find_datasets(apps):
 
 
 def fill_database(fixtures, verbosity=1):
-    """Given a list of fixture Data, fill all the data into database"""
+    """
+    Fill all datasets listed in ``fixtures`` into database.
+    """
     if not isinstance(fixtures, list):
         raise TypeError("Argument fixtures should be of type list.")
     if not len(fixtures):

@@ -26,30 +26,28 @@ class FixturappLoadTests(TestCase):
         self.failUnless(isinstance(create_command(), BaseCommand))
 
     def test_fixture_was_loaded_by_calling_command_for_one_app(self):
-        """Check if the fixturapp_load command has loaded Dummy fixtures into
-        database
+        """
+        Check fixturapp_load command has loaded Dummy fixtures into database
         """
         call_load('fixturapp.tests.dummyapp')
         obj = Dummy.objects.get(name='Buster')
         self.assertEquals(obj.name, DummyData.buster.name)
 
     def test_raises_when_cant_find_datasets_package_for_app(self):
-        """Raises when loading from a specific app that does not have datasets
-        package
-        """
+        """Raises when loading from specific app without datasets package"""
         self.assertRaises(ImportError,
                           lambda: call_load('fixturapp.tests.emptyapp'))
 
     def test_raises_when_app_have_empty_datasets_package(self):
-        """Raises when loading from a specific app that has an empty datasets
-        package
+        """
+        Raises when loading from a specific app with an empty datasets package
         """
         self.assertRaises(LookupError,
                           lambda: call_load('fixturapp.tests.incompleteapp'))
 
     def test_raises_when_some_app_does_not_have_data(self):
-        """``fixturapp_load app1 app2`` should be sucessfull only if all apps
-        have data.
+        """
+        ``fixturapp_load app1 app2`` should succeed only if all apps have data
         """
         self.assertRaises(LookupError,
                           lambda: call_load('fixturapp.tests.dummyapp',
@@ -59,7 +57,7 @@ class FixturappLoadTests(TestCase):
                                             'fixturapp.tests.emptyapp'))
 
     def test_fixture_was_loaded_by_calling_fixturapp_load(self):
-        """Check if ``fixturapp_load`` loaded DummyData to the database"""
+        """Check that fixturapp_load loaded DummyData to the database"""
         call_load('fixturapp.tests.dummyapp')
         obj = Dummy.objects.get(name='Buster')
         self.assertEquals(obj.name, DummyData.buster.name)

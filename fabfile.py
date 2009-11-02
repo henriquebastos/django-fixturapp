@@ -1,4 +1,5 @@
 import os
+import time
 from fabric.api import *
 
 
@@ -28,7 +29,6 @@ def autotest(command=None, sleep=1):
 
     This is based on Jeff Winkler's nosy script.
     """
-    import time
 
     def checkSum():
         '''

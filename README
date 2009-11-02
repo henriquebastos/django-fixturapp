@@ -30,9 +30,10 @@ To install django-fixturapp you will need setuptools:
     cd /path/to/repo
     python setup.py install
 
-To run Fixture's own test suite you need to create a buildout:
+To run Fixturapp's own test suite and to contribute, you need to create a
+buildout:
 
-    python setup.py
+    python bootstrap.py
     ./bin/buildout
 
 Then you can run the tests with:

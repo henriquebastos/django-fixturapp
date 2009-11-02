@@ -1,4 +1,3 @@
-from django.utils.importlib import import_module
 from fixture import DjangoFixture
 from fixture.style import NamedDataStyle
 
@@ -12,7 +11,7 @@ def get_datasets(app, package='.datasets', sufix='Data'):
     """
     fixtures = []
 
-    module = import_module(package, app)
+    module = __import__(app + package, fromlist=[''])
     # add classes ending with 'Data' to the fixtures list
     for i in dir(module):
         if i.endswith(sufix):

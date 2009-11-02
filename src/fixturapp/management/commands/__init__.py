@@ -27,9 +27,9 @@ def find_datasets(apps):
 def fill_database(fixtures, verbosity=1):
     """Given a list of fixture Data, fill all the data into database"""
     if not isinstance(fixtures, list):
-        raise TypeError("Expecting a list of Datasets.")
+        raise TypeError("Argument fixtures should be of type list.")
     if not len(fixtures):
-        raise ValueError("No datasets passed to fill database.")
+        raise ValueError("Argument fixtures is empyt.")
 
     def echo(msg):
         if verbosity:

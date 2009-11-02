@@ -14,6 +14,6 @@ class Command(NoArgsCommand):
         # Discover datasets in apps
         fixtures = find_datasets(settings.INSTALLED_APPS)
         if not len(fixtures):
-            raise CommandError('No fixture datasets found.')
+            raise CommandError('No datasets fixtures found.')
 
         fill_database(fixtures, int(options.get('verbosity', 1)))

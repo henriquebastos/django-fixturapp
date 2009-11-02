@@ -10,8 +10,10 @@ from fixturapp.tests.dummyapp.datasets import DummyData
 def create_command():
     return load_command_class('fixturapp', 'fixturapp_load')
 
+
 def call_load(*args):
     return call_command('fixturapp_load', *args, verbosity=0)
+
 
 class FixturappLoadTests(TestCase):
 

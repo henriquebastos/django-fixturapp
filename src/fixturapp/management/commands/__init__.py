@@ -47,7 +47,9 @@ def fill_database(fixtures, verbosity=1):
         if verbosity:
             print msg
 
-    echo("Datasets: %s" % fixtures.sort())
+    names = [c.__name__ for c in fixtures]
+
+    echo("Datasets:\n\t%s" % "\n\t".join(names))
     loader = DjangoFixture(style=NamedDataStyle())
     data = loader.data(*fixtures)
     echo("Installing datasets...")

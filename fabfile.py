@@ -33,7 +33,7 @@ def _pep8(files):
         abort("Staged files did not pass PEP8 validation.")
 
 
-def pre_commit():
+def git_pre_commit():
     """
     Pre-commit hook for git. Just add the bellow script to
     .git/hooks/pre-commit:

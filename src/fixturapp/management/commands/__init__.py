@@ -9,14 +9,8 @@ def get_datasets(app, package='.datasets', sufix='Data'):
 
     It's expected to raise any error out loud.
     """
-    fixtures = []
-
     module = __import__(app + package, fromlist=[''])
-    # add classes ending with 'Data' to the fixtures list
-    for i in dir(module):
-        if i.endswith(sufix):
-            fixtures.append(getattr(module, i))
-    return fixtures
+    return [getattr(module, i) for i in dir(module) if i.endswith(sufix)]
 
 
 def find_datasets(apps):

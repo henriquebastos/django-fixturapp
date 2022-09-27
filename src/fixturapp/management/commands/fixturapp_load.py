@@ -15,7 +15,7 @@ class Command(BaseCommand):
         for app in apps:
             datasets = get_datasets(app)
             if not len(datasets):
-                raise LookupError('No dataset found for %s.' % app)
+                raise LookupError(f'No dataset found for {app}.')
             fixtures.extend(datasets)
 
         fill_database(fixtures, int(options.get('verbosity', 1)))

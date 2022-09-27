@@ -13,7 +13,7 @@ def test(args=None):
     if args is None:
         args = ""
     with cd(os.path.dirname(__file__)):
-        local('./bin/django test %s --verbosity=0' % args, capture=False)
+        local(f'./bin/django test {args} --verbosity=0', capture=False)
 
 
 def _pep8(files):
@@ -24,8 +24,7 @@ def _pep8(files):
     with cd(os.path.dirname(__file__)):
         for f in files:
             if f.endswith('.py'):
-                out = local("pep8 %s" % f)
-                if out:
+                if out := local(f"pep8 {f}"):
                     result.append(out)
 
     if result:
